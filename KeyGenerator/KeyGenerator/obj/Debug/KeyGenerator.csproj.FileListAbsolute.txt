@@ -1,0 +1,7 @@
+c:\users\kamynin.2015\source\repos\KeyGenerator\KeyGenerator\bin\Debug\KeyGenerator.exe.config
+c:\users\kamynin.2015\source\repos\KeyGenerator\KeyGenerator\bin\Debug\KeyGenerator.exe
+c:\users\kamynin.2015\source\repos\KeyGenerator\KeyGenerator\bin\Debug\KeyGenerator.pdb
+c:\users\kamynin.2015\source\repos\KeyGenerator\KeyGenerator\obj\Debug\KeyGenerator.csprojAssemblyReference.cache
+c:\users\kamynin.2015\source\repos\KeyGenerator\KeyGenerator\obj\Debug\KeyGenerator.csproj.CoreCompileInputs.cache
+c:\users\kamynin.2015\source\repos\KeyGenerator\KeyGenerator\obj\Debug\KeyGenerator.exe
+c:\users\kamynin.2015\source\repos\KeyGenerator\KeyGenerator\obj\Debug\KeyGenerator.pdb
