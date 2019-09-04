@@ -5,3 +5,10 @@ c:\users\kamynin.2015\source\repos\CessaroCrypto\CessaroCrypto\obj\Debug\Cessaro
 c:\users\kamynin.2015\source\repos\CessaroCrypto\CessaroCrypto\obj\Debug\CessaroCrypto.csproj.CoreCompileInputs.cache
 c:\users\kamynin.2015\source\repos\CessaroCrypto\CessaroCrypto\obj\Debug\CessaroCrypto.exe
 c:\users\kamynin.2015\source\repos\CessaroCrypto\CessaroCrypto\obj\Debug\CessaroCrypto.pdb
+E:\projects\CryptoLab1\CryptoLab\CessaroCrypto\CessaroCrypto\bin\Debug\CessaroCrypto.exe.config
+E:\projects\CryptoLab1\CryptoLab\CessaroCrypto\CessaroCrypto\bin\Debug\CessaroCrypto.exe
+E:\projects\CryptoLab1\CryptoLab\CessaroCrypto\CessaroCrypto\bin\Debug\CessaroCrypto.pdb
+E:\projects\CryptoLab1\CryptoLab\CessaroCrypto\CessaroCrypto\obj\Debug\CessaroCrypto.csprojAssemblyReference.cache
+E:\projects\CryptoLab1\CryptoLab\CessaroCrypto\CessaroCrypto\obj\Debug\CessaroCrypto.csproj.CoreCompileInputs.cache
+E:\projects\CryptoLab1\CryptoLab\CessaroCrypto\CessaroCrypto\obj\Debug\CessaroCrypto.exe
+E:\projects\CryptoLab1\CryptoLab\CessaroCrypto\CessaroCrypto\obj\Debug\CessaroCrypto.pdb
