@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 namespace ConsoleApp2
 {
@@ -150,6 +151,25 @@ namespace ConsoleApp2
             string[] be = File.ReadAllLines("BeFreq.txt");
             string[] tri = File.ReadAllLines("TriFreq.txt");
             //todo
+            foreach (string item in mono)
+            {
+                string[] tmp = item.Replace(";", string.Empty).Split(' ');
+                controlMonoFrequency.Add(tmp[0],double.Parse(tmp[1]));
+            }
+            
+            foreach (string item in be)
+            {
+                string[] tmp = item.Replace(";", string.Empty).Split(' ');
+
+                controlBeFrequency.Add(tmp[0],double.Parse(tmp[1]));
+            }
+            
+            foreach (string item in mono)
+            {
+                string[] tmp = item.Replace(";", string.Empty).Split(' ');
+
+                controlTriFrequency.Add(tmp[0],double.Parse(tmp[1]));
+            }
         }
     }
 }

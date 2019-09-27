@@ -10,9 +10,6 @@ namespace ConsoleApp2
         static void Main(string[] args)
         {
             Text book = new Text("book.txt");
-            book.CalculateFrequency();
-            book.BeFreq();
-            book.TriFreq();
         }
     }
 }
