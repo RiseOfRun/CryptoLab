@@ -13,8 +13,6 @@ namespace ConsoleApp2
             book.CalculateFrequency();
             book.BeFreq();
             book.TriFreq();
-            Console.ReadKey();
-
         }
     }
 }

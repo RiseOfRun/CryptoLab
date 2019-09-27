@@ -8,6 +8,7 @@ namespace ConsoleApp2
     public class Text
     {
         Dictionary<char, char> key = new Dictionary<char, char>();
+        const double v1 = 1, v2 = 1, v3 = 1;
         string rusDict = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
         string text;
 
@@ -15,10 +16,25 @@ namespace ConsoleApp2
         Dictionary<string, double> controlBeFrequency = new Dictionary<string, double>();
         Dictionary<string, double> controlTriFrequency = new Dictionary<string, double>();
 
+
+        Dictionary<string, double> monoFrequency = new Dictionary<string, double>();
+        Dictionary<string, double> beFrequency = new Dictionary<string, double>();
+        Dictionary<string, double> triFrequency = new Dictionary<string, double>();
+
+
+
+        public string FindResponse()
+        {
+            Freq();
+
+            return "";
+        }
+
+
         public void CalculateFrequency()
         {
             //Farm
-
+            
             foreach (var c in rusDict)
             {
                 controlMonoFrequency[c.ToString()] = 0;
@@ -28,13 +44,14 @@ namespace ConsoleApp2
             {
                 controlMonoFrequency[c.ToString()] += 1;
             }
+            /*
             string output = "";
             foreach(var item in rusDict)
             {
-                output += $"{item} {controlMonoFrequency[item.ToString()]/text.Length*100}";
+                output += $"{item}; {controlMonoFrequency[item.ToString()]/text.Length}\n";
             }
 
-            File.WriteAllText("MonoFreq.txt", output);
+            File.WriteAllText("MonoFreq.txt", output);*/
             //
         }
 
@@ -52,55 +69,87 @@ namespace ConsoleApp2
             {
                 controlBeFrequency[$"{text[i]}{text[i + 1]}"] += 1;
             }
-
+            /*
             string output = "";
             for (int i = 0; i < rusDict.Length; i++)
             {
                 for (int j = 0; j < rusDict.Length; j++)
                 {
-                    output += $"{rusDict[i]}{rusDict[j]} {controlBeFrequency[$"{rusDict[i]}{rusDict[j]}"] /= (text.Length - 1)}";
+                    output += $"{rusDict[i]}{rusDict[j]}; {controlBeFrequency[$"{rusDict[i]}{rusDict[j]}"] /= (text.Length - 1)}\n";
                 }
             }
-            File.WriteAllText("BeFreq.txt", output);
+            File.WriteAllText("BeFreq.txt", output);*/
         }
 
-        public void TriFreq()
+        public void Freq()
         {
             foreach (char first in rusDict)
             {
+                monoFrequency[$"{first}"] = 0;
                 foreach (char second in rusDict)
                 {
+                    beFrequency[$"{first}{second}"] = 0;
                     foreach (char third in rusDict)
                     {
-                        string test = $"{first}{second}{third}";
-                        controlTriFrequency[test] = 0;
+                        triFrequency[$"{first}{second}{third}"] = 0;
                     }
                 }
             }
-            string output = "";
-            File.WriteAllText("TriFreq.txt", output);
-            for (int i = 0; i < rusDict.Length; i++)
+            for (int i = 0; i < text.Length - 2; i++)
             {
-                for (int j = 0; j < rusDict.Length; j++)
+                monoFrequency[$"{text[i]}"] += 1;
+                beFrequency[$"{text[i]}{text[i + 1]}"] += 1;
+                triFrequency[$"{text[i]}{text[i + 1]}{text[i + 2]}"] += 1;
+            }
+            monoFrequency[$"{text[text.Length - 2]}"] += 1;
+            monoFrequency[$"{text[text.Length - 1]}"] += 1;
+            beFrequency[$"{text[text.Length - 2]}{text[text.Length - 1]}"] += 1;
+            foreach (char first in rusDict)
+            {
+                monoFrequency[$"{first}"] /= text.Length;
+                foreach (char second in rusDict)
                 {
-                    for (int k = 0; k < rusDict.Length; k++)
+                    beFrequency[$"{first}{second}"] /= text.Length;
+                    foreach (char third in rusDict)
                     {
-                        output += $"{rusDict[i]}{rusDict[j]}{rusDict[k]} {controlTriFrequency[$"{rusDict[i]}{rusDict[j]}{rusDict[k]}"] /= (text.Length - 1)}";
+                        triFrequency[$"{first}{second}{third}"] /= text.Length;
                     }
                 }
             }
-            File.WriteAllText("BeFreq.txt", output);
         }
 
 
         //double LocalPrecision
 
-        double Precision(Dictionary<char, char> key) { return 0; }
+        double Precision(Dictionary <char, double> key)
+        {
+            double g1 = 0;
+            double g2 = 0;
+            double g3 = 0;
+            Freq();
+            foreach (char first in rusDict)
+            {
+                g1 += Math.Abs(monoFrequency[$"{first}"] - controlMonoFrequency[$"{first}"]);
+                foreach (char second in rusDict)
+                {
+                    g2 += Math.Abs(beFrequency[$"{first}{second}"] - controlBeFrequency[$"{first}{second}"]);
+                    foreach (char third in rusDict)
+                    {
+                        g3 += Math.Abs(triFrequency[$"{first}{second}{third}"] - controlTriFrequency[$"{first}{second}{third}"]);
+                    }
+                }
+            }
+            return v1 * g1 + v2 * g2 + v3 * g3;
+        }
 
         public Text (string path)
         {
             text = File.ReadAllText(path);
             text = new string (text.ToLower().Where(x => x >= 'а' && x <= 'я' || x =='ё').ToArray());
+            string[] mono = File.ReadAllLines("MonoFreq.txt");
+            string[] be = File.ReadAllLines("BeFreq.txt");
+            string[] tri = File.ReadAllLines("TriFreq.txt");
+            //todo
         }
     }
 }
