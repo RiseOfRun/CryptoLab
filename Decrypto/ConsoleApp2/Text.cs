@@ -27,7 +27,13 @@ namespace ConsoleApp2
         public string FindResponse()
         {
             Freq();
+            string output = "";
+            foreach (var item in rusDict)
+            {
+                output += $"{item}; {monoFrequency[item.ToString()] / text.Length}\n";
+            }
 
+            File.WriteAllText("Freq.txt", output);
             return "";
         }
 
