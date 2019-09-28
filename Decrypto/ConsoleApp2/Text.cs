@@ -11,7 +11,10 @@ namespace ConsoleApp2
         Dictionary<char, char> key = new Dictionary<char, char>();
         const double v1 = 1, v2 = 1, v3 = 1;
         string rusDict = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+        public string bestKey;
         string text;
+
+        public double bestMeaningfulness;
 
         Dictionary<string, double> controlMonoFrequency = new Dictionary<string, double>();
         Dictionary<string, double> controlBeFrequency = new Dictionary<string, double>();
@@ -23,10 +26,33 @@ namespace ConsoleApp2
         Dictionary<string, double> triFrequency = new Dictionary<string, double>();
 
 
+        public double Step()
+        {
+            for (int i = 0; i < 32; i++)
+            {
+                for (int j = i+1; j < 33; j++)
+                {
+                    string testingKey = bestKey;
+                    List<char> tmp = new List<char>(testingKey);
+                    char tmp2;
+                    tmp2 = tmp[i];
+                    tmp[i] = tmp[j];
+                    tmp[j] = tmp2;
+                    testingKey = new string(tmp.ToArray());
+                    double newMean = Meaningfluense(testingKey);
+                    if (newMean < bestMeaningfulness)
+                    {
+                        bestMeaningfulness = newMean;
+                        bestKey = testingKey;
+                    }          
+                }
+            }
+            return bestMeaningfulness;
+        }
 
         public string FindResponse()
         {
-            Freq();
+            Freq(rusDict);
             string output = "";
             foreach (var item in rusDict)
             {
@@ -37,6 +63,23 @@ namespace ConsoleApp2
             return "";
         }
 
+        public void FindStartKey()
+        {
+            Freq(rusDict);
+            Dictionary<string,string> keyAssociation = new Dictionary<string, string>();
+            var mono = monoFrequency.OrderBy(pair => pair.Value).ToList();
+            var control = controlMonoFrequency.OrderBy(pair => pair.Value).ToList();
+            for (int i = 0; i < 33; i++)
+            {
+                keyAssociation.Add(control[i].Key.ToString(),mono[i].Key.ToString());
+            }
+
+            bestKey = "";
+            foreach (var item in rusDict)
+            {
+                bestKey += keyAssociation[item.ToString()];
+            }
+        }
 
         public void CalculateFrequency()
         {
@@ -88,8 +131,13 @@ namespace ConsoleApp2
             File.WriteAllText("BeFreq.txt", output);*/
         }
 
-        public void Freq()
+        public void Freq(string key)
         {
+            Dictionary<char, char> keyAss = new Dictionary<char, char>();
+            for (int i = 0; i < 33; i++)
+            {
+                keyAss.Add(rusDict[i],key[i]);
+            }
             foreach (char first in rusDict)
             {
                 monoFrequency[$"{first}"] = 0;
@@ -104,13 +152,13 @@ namespace ConsoleApp2
             }
             for (int i = 0; i < text.Length - 2; i++)
             {
-                monoFrequency[$"{text[i]}"] += 1;
-                beFrequency[$"{text[i]}{text[i + 1]}"] += 1;
-                triFrequency[$"{text[i]}{text[i + 1]}{text[i + 2]}"] += 1;
+                monoFrequency[$"{keyAss[text[i]]}"] += 1;
+                beFrequency[$"{keyAss[text[i]]}{keyAss[text[i + 1]]}"] += 1;
+                triFrequency[$"{keyAss[text[i]]}{keyAss[text[i + 1]]}{keyAss[text[i + 2]]}"] += 1;
             }
-            monoFrequency[$"{text[text.Length - 2]}"] += 1;
-            monoFrequency[$"{text[text.Length - 1]}"] += 1;
-            beFrequency[$"{text[text.Length - 2]}{text[text.Length - 1]}"] += 1;
+            monoFrequency[$"{keyAss[text[text.Length - 2]]}"] += 1;
+            monoFrequency[$"{keyAss[text[text.Length - 1]]}"] += 1;
+            beFrequency[$"{keyAss[text[text.Length - 2]]}{keyAss[text[text.Length - 1]]}"] += 1;
             foreach (char first in rusDict)
             {
                 monoFrequency[$"{first}"] /= text.Length;
@@ -128,12 +176,12 @@ namespace ConsoleApp2
 
         //double LocalPrecision
 
-        double Precision(Dictionary <char, double> key)
+        double Meaningfluense(string key)
         {
             double g1 = 0;
             double g2 = 0;
             double g3 = 0;
-            Freq();
+            Freq(key);
             foreach (char first in rusDict)
             {
                 g1 += Math.Abs(monoFrequency[$"{first}"] - controlMonoFrequency[$"{first}"]);
@@ -170,12 +218,15 @@ namespace ConsoleApp2
                 controlBeFrequency.Add(tmp[0],double.Parse(tmp[1]));
             }
             
-            foreach (string item in mono)
+            foreach (string item in tri)
             {
                 string[] tmp = item.Replace(";", string.Empty).Split(' ');
 
                 controlTriFrequency.Add(tmp[0],double.Parse(tmp[1]));
             }
+            
+            FindStartKey();
+            bestMeaningfulness = Meaningfluense(bestKey);
         }
     }
 }

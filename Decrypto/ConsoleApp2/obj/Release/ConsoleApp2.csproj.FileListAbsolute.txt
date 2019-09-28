@@ -12,3 +12,10 @@ C:\Users\kimev\OneDrive\Рабочий стол\git\CryptoLab\Decrypto\ConsoleAp
 C:\Users\kimev\OneDrive\Рабочий стол\git\CryptoLab\Decrypto\ConsoleApp2\obj\Release\ConsoleApp2.csproj.CoreCompileInputs.cache
 C:\Users\kimev\OneDrive\Рабочий стол\git\CryptoLab\Decrypto\ConsoleApp2\obj\Release\ConsoleApp2.exe
 C:\Users\kimev\OneDrive\Рабочий стол\git\CryptoLab\Decrypto\ConsoleApp2\obj\Release\ConsoleApp2.pdb
+E:\projects\CryptoLab1\CryptoLab\Decrypto\ConsoleApp2\bin\Release\ConsoleApp2.exe.config
+E:\projects\CryptoLab1\CryptoLab\Decrypto\ConsoleApp2\bin\Release\ConsoleApp2.exe
+E:\projects\CryptoLab1\CryptoLab\Decrypto\ConsoleApp2\bin\Release\ConsoleApp2.pdb
+E:\projects\CryptoLab1\CryptoLab\Decrypto\ConsoleApp2\obj\Release\ConsoleApp2.csprojAssemblyReference.cache
+E:\projects\CryptoLab1\CryptoLab\Decrypto\ConsoleApp2\obj\Release\ConsoleApp2.csproj.CoreCompileInputs.cache
+E:\projects\CryptoLab1\CryptoLab\Decrypto\ConsoleApp2\obj\Release\ConsoleApp2.exe
+E:\projects\CryptoLab1\CryptoLab\Decrypto\ConsoleApp2\obj\Release\ConsoleApp2.pdb
