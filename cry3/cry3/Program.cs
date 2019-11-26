@@ -16,6 +16,7 @@ namespace cry3
             s.CreateCertificate("Anton3");
             X509Certificate2 cert = new X509Certificate2("Anton3.pem", "Fynjy123");
             Console.WriteLine($"{cert.HasPrivateKey}");
+            
 
 
             
