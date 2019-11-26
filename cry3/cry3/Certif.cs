@@ -20,16 +20,6 @@ namespace cry3
             CertificateRequest req = new CertificateRequest("CN=Стас и Антон", key, 
                 HashAlgorithmName.SHA256,
                 RSASignaturePadding.Pkcs1);
-
-            req.CertificateExtensions.Add(new X509BasicConstraintsExtension(false, false, 0, false));
-            req.CertificateExtensions.Add(new X509KeyUsageExtension(
-                X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.NonRepudiation, false));
-            req.CertificateExtensions.Add(new X509EnhancedKeyUsageExtension(
-                new OidCollection
-                {
-                    new Oid("2.6.1.1.2.0.1.9")
-                },
-                true));
             req.CertificateExtensions.Add(new X509SubjectKeyIdentifierExtension(req.PublicKey, false));
             X509Certificate2 certif =  req.CreateSelfSigned(DateTimeOffset.UtcNow.AddDays(-1),
                 DateTimeOffset.UtcNow.AddYears(50));
