@@ -43,32 +43,6 @@ namespace cry3
             File.WriteAllBytes("cer_" + nameFile, result);
         }
 
-        private static string SignMyData()
-        {
-            string part1 = "5BC44FA0945347E590EB002F519F1D73";
-            X509Certificate2 x509 = new X509Certificate2("mycert.pfx", "mypassword");
-
-            UnicodeEncoding encoding = new UnicodeEncoding();
-            byte[] originalData = encoding.GetBytes(part1);
-
-            // Create an instance of the RSA encryption algorithm
-            // and perform the actual encryption
-            using (RSACryptoServiceProvider csp = (RSACryptoServiceProvider)x509.PrivateKey)
-            {
-                byte[] computedHash = csp.SignData(originalData, new MD5CryptoServiceProvider());
-
-                string part2 = ByteArrayToHexString(computedHash);
-
-                return part1 + ";0x" + part2;
-            }
-        }
-
-        public static string ByteArrayToHexString(byte[] ba)
-        {
-            string hex = BitConverter.ToString(ba);
-            return hex.Replace("-", "");
-        }
-
 
 
 
