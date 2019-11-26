@@ -12,18 +12,9 @@ namespace cry3
     {
         static void Main(string[] args)
         {
-            Certif s = new Certif(1024);
-            s.CreateCertificate("Anton3");
-            X509Certificate2 cert = new X509Certificate2("Anton3.pem", "Fynjy123");
-            Console.WriteLine($"{cert.HasPrivateKey}");
-            
-
-
-            
-            
-
-
-
+            Certif c = new Certif(1024);
+            c.CreateCertificate("main");
+            c.EncryptFile("main", "9k.png");
         }
     }
 }
