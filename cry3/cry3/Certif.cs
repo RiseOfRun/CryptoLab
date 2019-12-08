@@ -33,41 +33,34 @@ namespace cry3
             File.WriteAllBytes(name + ".pem", certif.Export(X509ContentType.Pkcs12, PASS));
         }
 
-        public void EncryptFile(string nameCert, string nameFile)
+        public void SignFile(string nameCert, string nameFile)
         {
-            X509Certificate2 cert = new X509Certificate2(nameCert + ".pem", PASS);
+            X509Certificate2 cert = new X509Certificate2(nameCert, PASS);
+            SHA256CryptoServiceProvider hasher = new SHA256CryptoServiceProvider();        
             byte[] file = File.ReadAllBytes(nameFile);
-            RSACryptoServiceProvider csp = cert.PrivateKey as RSACryptoServiceProvider;
-            byte[] computeHash = csp.SignData(file, new SHA256CryptoServiceProvider());
-            byte[] result = file.Concat(computeHash).ToArray();
-            File.WriteAllBytes("cer_" + nameFile, result);
+            byte[] hash = hasher.ComputeHash(file);
+            RSACryptoServiceProvider csp = cert.PrivateKey as RSACryptoServiceProvider;            
+            byte[] certHash = csp.SignData(file, new SHA256CryptoServiceProvider());
+            File.WriteAllBytes(nameFile + ".sgn", certHash);
+            File.WriteAllBytes(nameFile + ".sha256", hash);
         }
 
-        private static string SignMyData()
+        public bool Validate(string nameCert, string sgnFilePath, string hashpath)
         {
-            string part1 = "5BC44FA0945347E590EB002F519F1D73";
-            X509Certificate2 x509 = new X509Certificate2("mycert.pfx", "mypassword");
+            X509Certificate2 cert = new X509Certificate2(nameCert, PASS);
+            byte[] file = File.ReadAllBytes(sgnFilePath);
 
-            UnicodeEncoding encoding = new UnicodeEncoding();
-            byte[] originalData = encoding.GetBytes(part1);
-
-            // Create an instance of the RSA encryption algorithm
-            // and perform the actual encryption
-            using (RSACryptoServiceProvider csp = (RSACryptoServiceProvider)x509.PrivateKey)
-            {
-                byte[] computedHash = csp.SignData(originalData, new MD5CryptoServiceProvider());
-
-                string part2 = ByteArrayToHexString(computedHash);
-
-                return part1 + ";0x" + part2;
-            }
+            byte[] hashfile = File.ReadAllBytes(hashpath);
+            RSACryptoServiceProvider csp = cert.PublicKey.Key as RSACryptoServiceProvider;
+            csp.VerifyHash(hashfile, file, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+            csp.VerifyHash(hashfile, file, HashAlgorithmName.SHA384, RSASignaturePadding.Pkcs1);
+            csp.VerifyHash(hashfile, file, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1);
+            csp.VerifyHash(hashfile, file, HashAlgorithmName.MD5, RSASignaturePadding.Pkcs1);
+            csp.VerifyHash(hashfile, file, HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
+            return true;
         }
 
-        public static string ByteArrayToHexString(byte[] ba)
-        {
-            string hex = BitConverter.ToString(ba);
-            return hex.Replace("-", "");
-        }
+      
 
 
 

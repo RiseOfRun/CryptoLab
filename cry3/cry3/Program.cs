@@ -13,8 +13,10 @@ namespace cry3
         static void Main(string[] args)
         {
             Certif c = new Certif(1024);
-            c.CreateCertificate("main");
-            c.EncryptFile("main", "9k.png");
+            //c.CreateCertificate("main");
+            //c.SignFile("main.pem", "selfi1.jpg");
+            Console.WriteLine($"{c.Validate("test.cer", "selfi1.jpg.sgn", "selfi1.jpg.sha256")}");
+
         }
     }
 }

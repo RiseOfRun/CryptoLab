@@ -22,3 +22,9 @@ C:\Users\kimev\OneDrive\Рабочий стол\git\CryptoLab\cry3\cry3\obj\Debu
 C:\Users\kimev\OneDrive\Рабочий стол\git\CryptoLab\cry3\cry3\obj\Debug\cry3.csproj.CoreCompileInputs.cache
 C:\Users\kimev\OneDrive\Рабочий стол\git\CryptoLab\cry3\cry3\obj\Debug\cry3.exe
 C:\Users\kimev\OneDrive\Рабочий стол\git\CryptoLab\cry3\cry3\obj\Debug\cry3.pdb
+C:\Users\kamynin.2015\Desktop\CryptoLab3\cry3\cry3\bin\Debug\cry3.exe.config
+C:\Users\kamynin.2015\Desktop\CryptoLab3\cry3\cry3\bin\Debug\cry3.exe
+C:\Users\kamynin.2015\Desktop\CryptoLab3\cry3\cry3\bin\Debug\cry3.pdb
+C:\Users\kamynin.2015\Desktop\CryptoLab3\cry3\cry3\obj\Debug\cry3.csprojAssemblyReference.cache
+C:\Users\kamynin.2015\Desktop\CryptoLab3\cry3\cry3\obj\Debug\cry3.exe
+C:\Users\kamynin.2015\Desktop\CryptoLab3\cry3\cry3\obj\Debug\cry3.pdb
